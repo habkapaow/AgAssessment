@@ -5,7 +5,7 @@
     using Newtonsoft.Json.Linq;
     using System.Net;
 
-    public class Part1_JsonPlaceholder
+    public class JsonPlaceholder
     {
         private const string BaseUrl = "https://jsonplaceholder.typicode.com";
         private RestClient _client;

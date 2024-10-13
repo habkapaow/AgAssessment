@@ -34,15 +34,7 @@ dotnet add package Selenium.Chrome.WebDriver
 
 ## Project Structure
 
-AgData/
-├── Part1_JsonPlaceholderApiTests/  # Contains the API test cases
-│   ├── JsonPlaceholder.cs          # API Test cases for verifying the API endpoints
-├── Ui/                             # Contains the UI test cases and related files
-│   ├── PageObjects/                # Page Object Model classes for UI tests
-│   ├── Tests/                      # Contains UI test cases
-│   ├── Utilities/                  # Utility classes like WebDriver setup and helpers
-│   ├── App.runsettings             # Configuration file for test parameters
-├── AgData.sln                      # Visual Studio solution file
+![image](https://github.com/user-attachments/assets/57b7ac48-68d0-4d73-8590-924c45a350bd)
 
 
 ## Runsettings File Configuration

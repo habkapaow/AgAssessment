@@ -21,7 +21,7 @@ namespace UIAutomation.PageObjects
         {
             IList<IWebElement> headings = driver.FindElements(waysYouBenefitHeadings);
             // Assert that each heading is displayed
-            foreach (var heading in headings)
+            foreach (IWebElement heading in headings)
             {
                 Assert.That(heading.Displayed, Is.True, $"The heading '{heading.Text}' is not visible.");
             }

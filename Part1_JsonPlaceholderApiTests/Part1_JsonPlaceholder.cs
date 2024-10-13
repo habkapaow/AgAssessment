@@ -86,5 +86,28 @@
             Assert.That(response?.StatusCode, Is.EqualTo(HttpStatusCode.Created), $"Failed to add comment to post with ID {_postId}, name: {name}, email: {email}, body: {body}. {response.Content}");
         }
 
+        [Test]
+        public void DeletePost()
+        {
+            // DELETE an existing post
+            RestRequest request = new RestRequest($"/posts/{_postId}", Method.Delete);
+
+            RestResponse response = _client.Execute(request);
+            Assert.That(response?.StatusCode, Is.EqualTo(HttpStatusCode.OK), $"Failed to delete post with ID {_postId}. {response.Content}");
+        }
+
+        [Test]
+        public void InvalidPostIdReturnsNotFound()
+        {
+            // Use an invalid post ID for the request
+            string invalidPostId = "abcde";
+
+            RestRequest request = new RestRequest($"/posts/{invalidPostId}", Method.Get);
+            RestResponse response = _client.Execute(request);
+
+            // Expect a NotFound response
+            Assert.That(response?.StatusCode, Is.EqualTo(HttpStatusCode.NotFound), $"Expected NotFound for post ID {invalidPostId}, but got {response.StatusCode}. {response.Content}");
+        }
+
     }
 }

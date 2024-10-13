@@ -51,5 +51,40 @@
             Assert.That(response?.StatusCode, Is.EqualTo(HttpStatusCode.Created), $"Failed to create post with title: {title}, body: {body}, userId: {userId}. {response.Content}");
         }
 
+        [Test]
+        [TestCase("Updated Title 1", "Updated Body 1")]
+        public void UpdatePost(string title, string body)
+        {
+            // PUT to update an existing post
+            RestRequest request = new RestRequest($"/posts/{_postId}", Method.Put);
+            request.AddJsonBody(new
+            {
+                id = _postId,
+                title = title,
+                body = body,
+                userId = _userId
+            });
+
+            RestResponse response = _client.Execute(request);
+            Assert.That(response?.StatusCode, Is.EqualTo(HttpStatusCode.OK), $"Failed to update post with ID {_postId}, title: {title}, body: {body}. {response.Content}");
+        }
+
+        [Test]
+        [TestCase("Test Comment 1", "test1@example.com", "This is a test comment 1")]
+        public void AddCommentToPost(string name, string email, string body)
+        {
+            // POST to add a comment to an existing post
+            RestRequest request = new RestRequest($"/posts/{_postId}/comments", Method.Post);
+            request.AddJsonBody(new
+            {
+                name = name,
+                email = email,
+                body = body
+            });
+
+            RestResponse response = _client.Execute(request);
+            Assert.That(response?.StatusCode, Is.EqualTo(HttpStatusCode.Created), $"Failed to add comment to post with ID {_postId}, name: {name}, email: {email}, body: {body}. {response.Content}");
+        }
+
     }
 }

@@ -92,7 +92,10 @@ The API tests are designed to:
 2. **Edit a post** using a PUT request.
 3. **Add a comment** to the post using a POST request.
 4. **Delete a post** and verify its deletion with a GET request.
-5. Use assertions to ensure that the correct HTTP status codes are returned.
+5. Invalid PostID handled
+
+Use assertions to ensure that the correct HTTP status codes are returned.
+For negative testing, validatting missing fields, invalid fields .. etc were attempted but the endpoints don't support this so only invalid postid was added for negative testing
 
 Note that initially, in a real environment where the data is retained, test data would be created/modified and then validated. However, this environment doesn't retain data so only the response codes where validated. Also, the created data in the setup would have allowed for more control of the data and so it is not conflicting with the data currently in the environment
 

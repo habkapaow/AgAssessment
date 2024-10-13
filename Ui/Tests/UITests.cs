@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using UIAutomation.PageObjects;
 using AgData.Utilities;
+using UIAutomation.Utilities;
 
 namespace UIAutomation.Tests
 {
@@ -12,7 +13,7 @@ namespace UIAutomation.Tests
         [SetUp]
         public void Setup()
         {
-            string baseUrl = BaseUtils.GetParameter("baseUrl");
+            string baseUrl = BaseUtils.GetParameter("baseUrlUi");
 
             // Initialize the driver with the URL from the .runsettings file
             driver = WebDriverUtils.InitializeDriver(baseUrl);

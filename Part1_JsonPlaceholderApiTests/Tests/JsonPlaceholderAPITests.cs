@@ -1,18 +1,19 @@
-﻿namespace Api.Tests
-{
-    using NUnit.Framework;
-    using RestSharp;
-    using Newtonsoft.Json.Linq;
-    using System.Net;
-    using NLog;
+﻿using log4net;
+using NUnit.Framework;
+using RestSharp;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using AgData.Utilities;
 
+namespace Api.Tests
+{
     public class JsonPlaceholderAPITests
     {
-        private const string BaseUrl = "https://jsonplaceholder.typicode.com";
+        private readonly string BaseUrl = BaseUtils.GetParameter("baseUrlApi");
         private RestClient _client;
         private int _postId;
         private int _userId;
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(JsonPlaceholderAPITests));
 
         [SetUp]
         public void Setup()

@@ -46,13 +46,15 @@ xml
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
   <TestRunParameters>
-    <Parameter name="baseUrl" value="https://www.agdata.com" />
+		<Parameter name="baseUrlUi" value="#####" />
+		<Parameter name="baseUrlApi" value="#####" />
   </TestRunParameters>
 </RunSettings>
 
 
 This file defines:
-- **baseUrl**: The base URL for UI tests.
+- **baseUrlUi**: The base URL for UI tests.
+- **baseUrlApi**: The base URL for API tests.
 
 Make sure you select the App.runsettings file in Visual Studio:
 - **Test** > **Configure Run Settings** > **Select Solution Wide Run Settings File** > Choose your App.runsettings file.
@@ -78,7 +80,7 @@ You can also run the tests from the Test Explorer from VS GUI
 
 ## API Tests
 
-The API tests are located in the JsonPlaceholder.cs file and cover the following endpoints from [JSONPlaceholder](https://jsonplaceholder.typicode.com/guide):
+The API tests are located in the JsonPlaceholder.cs file and cover the following endpoints:
 
 - **GET /posts**
 - **POST /posts**
@@ -112,11 +114,11 @@ Note that initially, in a real environment where the data is retained, test data
 
 ## Logging
 
-NLog has been integrated into this solution to capture logs for both API and UI tests. You can configure logging to output to both a file and the console.
+Log4Net has been integrated into this solution to capture logs for both API and UI tests. You can configure logging to output to both a file and the console.
 
-### NLog Configuration
+### Log4Net Configuration
 
-The `NLog.config` file is located in the root directory (`AgData/`) and is shared by both projects:
+The `Log4Net.config` file is located in the root directory (`AgData/`) and is shared by both projects. Logs will be stored in the project directory under `logs/`
 
 ---
 

@@ -34,5 +34,22 @@
             _userId = (int)posts.First["userId"];
         }
 
+        [Test]
+        [TestCase("Title 1", "Body 1", 1)]
+        public void CreatePost(string title, string body, int userId)
+        {
+            // POST to create a new post
+            RestRequest request = new RestRequest("/posts", Method.Post);
+            request.AddJsonBody(new
+            {
+                title = title,
+                body = body,
+                userId = userId
+            });
+
+            RestResponse response = _client.Execute(request);
+            Assert.That(response?.StatusCode, Is.EqualTo(HttpStatusCode.Created), $"Failed to create post with title: {title}, body: {body}, userId: {userId}. {response.Content}");
+        }
+
     }
 }

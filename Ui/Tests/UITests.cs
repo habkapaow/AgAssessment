@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using UIAutomation.PageObjects;
-using UIAutomation.Utilities;
+using AgData.Utilities;
 
 namespace UIAutomation.Tests
 {

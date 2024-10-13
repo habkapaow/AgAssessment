@@ -1,21 +1,25 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System;
+using NLog;
 
-namespace UIAutomation.Utilities
+namespace AgData.Utilities
 {
     public static class BaseUtils
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public static string GetParameter(string parameterName)
         {
-            // Fetch the parameter from TestContext
+            Logger.Info($"Fetching parameter: {parameterName}");
             string parameterValue = TestContext.Parameters.Get(parameterName);
 
-            // If the parameter value is null or empty, throw an exception with the passed name
             if (string.IsNullOrEmpty(parameterValue))
             {
+                Logger.Error($"{parameterName} is null or empty.");
                 throw new ArgumentNullException(parameterName, $"{parameterName} cannot be null or empty. Ensure it is defined in the .runsettings file.");
             }
 
+            Logger.Info($"Parameter {parameterName} retrieved successfully.");
             return parameterValue;
         }
     }

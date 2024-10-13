@@ -9,6 +9,7 @@ This repository contains a suite of automated tests for Ag### assessment validat
 - [Setting Up and Running Tests](#setting-up-and-running-tests)
 - [API Tests](#api-tests)
 - [UI Tests](#ui-tests)
+- [Loggin](#nlogc-onfiguration)
 
 ---
 
@@ -108,6 +109,14 @@ Note that initially, in a real environment where the data is retained, test data
 
 **Key Utility**: 
 - BaseUtils.GetParameter("baseUrl"): Fetches the base URL for UI tests from the .runsettings file.
+
+## Logging
+
+NLog has been integrated into this solution to capture logs for both API and UI tests. You can configure logging to output to both a file and the console.
+
+### NLog Configuration
+
+The `NLog.config` file is located in the root directory (`AgData/`) and is shared by both projects:
 
 ---
 

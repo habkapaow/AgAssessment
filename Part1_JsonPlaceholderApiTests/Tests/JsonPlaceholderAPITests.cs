@@ -1,11 +1,11 @@
-﻿namespace AgAssessment
+﻿namespace Api.Tests
 {
     using NUnit.Framework;
     using RestSharp;
     using Newtonsoft.Json.Linq;
     using System.Net;
 
-    public class JsonPlaceholder
+    public class JsonPlaceholderAPITests
     {
         private const string BaseUrl = "https://jsonplaceholder.typicode.com";
         private RestClient _client;
@@ -35,6 +35,31 @@
         }
 
         [Test]
+        public void ValidateGetPostResponse()
+        {
+            // GET an existing post and validate all fields are present and correct
+            RestRequest request = new RestRequest($"/posts/{_postId}", Method.Get);
+            RestResponse response = _client.Execute(request);
+
+            Assert.That(response?.StatusCode, Is.EqualTo(HttpStatusCode.OK), $"Failed to retrieve post with ID {_postId}. {response.Content}");
+
+            // Log the response content for debugging
+            Console.WriteLine($"Response Content: {response?.Content}");
+
+            // Assert that the content is not null
+            Assert.That(response?.Content, Is.Not.Null, "Response content is null.");
+
+            // Parse the response content
+            JObject post = JObject.Parse(response.Content);
+
+            // Validate that all required fields exist
+            Assert.That(post.ContainsKey("userId"), Is.True, "userId field is missing.");
+            Assert.That(post.ContainsKey("id"), Is.True, "id field is missing.");
+            Assert.That(post.ContainsKey("title"), Is.True, "title field is missing.");
+            Assert.That(post.ContainsKey("body"), Is.True, "body field is missing.");
+        }
+
+        [Test]
         [TestCase("Title 1", "Body 1", 1)]
         public void CreatePost(string title, string body, int userId)
         {
@@ -42,9 +67,9 @@
             RestRequest request = new RestRequest("/posts", Method.Post);
             request.AddJsonBody(new
             {
-                title = title,
-                body = body,
-                userId = userId
+                title,
+                body,
+                userId
             });
 
             RestResponse response = _client.Execute(request);
@@ -60,8 +85,8 @@
             request.AddJsonBody(new
             {
                 id = _postId,
-                title = title,
-                body = body,
+                title,
+                body,
                 userId = _userId
             });
 
@@ -77,9 +102,9 @@
             RestRequest request = new RestRequest($"/posts/{_postId}/comments", Method.Post);
             request.AddJsonBody(new
             {
-                name = name,
-                email = email,
-                body = body
+                name,
+                email,
+                body
             });
 
             RestResponse response = _client.Execute(request);

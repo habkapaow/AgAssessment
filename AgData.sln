@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{007FB90A-25EB-48A7-A101-690350F855B9}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		Ui\Utilities\BaseUtils.cs = Ui\Utilities\BaseUtils.cs
 	EndProjectSection
 EndProject
 Global

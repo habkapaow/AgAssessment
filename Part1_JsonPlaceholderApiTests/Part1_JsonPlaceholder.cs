@@ -1,4 +1,4 @@
-﻿namespace AgDataAssessment
+﻿namespace AgAssessment
 {
     using NUnit.Framework;
     using RestSharp;

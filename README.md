@@ -40,7 +40,7 @@ dotnet add package Selenium.Chrome.WebDriver
 
 ## Runsettings File Configuration
 
-The App.runsettings file is used to configure runtime settings for tests, including the environment URL for API and UI tests. Ensure you have the App.runsettings file set up in your project under the Ui/ directory:
+The env.runsettings file is used to configure runtime settings for tests, including the environment URL for API and UI tests. Ensure you have the env.runsettings file set up in your project under the Ui/ directory:
 
 xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -49,21 +49,27 @@ xml
 		<Parameter name="baseUrlUi" value="#####" />
 		<Parameter name="baseUrlApi" value="#####" />
   </TestRunParameters>
+  <NUnit>
+    <NumberOfTestWorkers>#</NumberOfTestWorkers> <!-- Ensure this is set for parallelism -->
+    <DefaultTestExecutionMode>Parallel</DefaultTestExecutionMode> <!-- Set parallel execution -->
+  </NUnit>
 </RunSettings>
 
 
 This file defines:
 - **baseUrlUi**: The base URL for UI tests.
 - **baseUrlApi**: The base URL for API tests.
+- **NumberOfTestWorkers**: This specifies the number of workers/treads for running the tests in parallel by test-level.
+- **DefaultTestExecutionMode**: This enables by default parallel execution.
 
-Make sure you select the App.runsettings file in Visual Studio:
-- **Test** > **Configure Run Settings** > **Select Solution Wide Run Settings File** > Choose your App.runsettings file.
+Make sure you select the env.runsettings file in Visual Studio:
+- **Test** > **Configure Run Settings** > **Select Solution Wide Run Settings File** > Choose your env.runsettings file.
 
 ## Setting Up and Running Tests
 
 ### Running Tests from Visual Studio
 1. Open **Visual Studio**.
-2. Ensure that the App.runsettings file is selected as the active run settings.
+2. Ensure that the env.runsettings file is selected as the active run settings.
 3. In the **Test Explorer**, you can find all available tests.
 4. Click **Run All** or select specific tests to execute them.
 
@@ -71,12 +77,11 @@ Make sure you select the App.runsettings file in Visual Studio:
 You can run tests using the .NET CLI as follows:
 
 bash
-dotnet test --settings Ui/App.runsettings
+dotnet test --settings env.runsettings -m
 
 
-This command ensures that the tests use the settings from the App.runsettings file.
+This command ensures that the tests use the settings from the env.runsettings file.
 
-You can also run the tests from the Test Explorer from VS GUI
 
 ## API Tests
 

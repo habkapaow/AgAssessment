@@ -6,6 +6,7 @@ using UIAutomation.Utilities;
 
 namespace UIAutomation.Tests
 {
+    [Parallelizable(ParallelScope.All)]
     public class UITests
     {
         private IWebDriver driver;

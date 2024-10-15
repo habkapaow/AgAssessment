@@ -7,6 +7,7 @@ using AgData.Utilities;
 
 namespace Api.Tests
 {
+    [Parallelizable(ParallelScope.All)]
     public class JsonPlaceholderAPITests
     {
         private readonly string BaseUrl = BaseUtils.GetParameter("baseUrlApi");

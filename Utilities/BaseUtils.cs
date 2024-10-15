@@ -16,10 +16,23 @@ namespace AgData.Utilities
         {
             if (!isLoggerInitialized)
             {
-                var logRepository = LogManager.GetRepository(System.Reflection.Assembly.GetEntryAssembly());
+                var repository = LogManager.GetRepository(System.Reflection.Assembly.GetEntryAssembly());
+
+                // Check if the logger repository is already configured
+                if (repository == null)
+                {
+                    throw new InvalidOperationException("Logger repository not found. Cannot configure log4net.");
+                }
+
+                // Ensure that the configuration file exists
+                var logConfigFile = new FileInfo("log4net.config");
+                if (!logConfigFile.Exists)
+                {
+                    throw new FileNotFoundException("Log4net configuration file not found: log4net.config");
+                }
 
                 // Explicitly configure log4net to use the log4net.config file
-                XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+                XmlConfigurator.Configure(repository, logConfigFile);
 
                 log.Info("Logger initialized.");
                 isLoggerInitialized = true;  // Ensure the logger is only initialized once
